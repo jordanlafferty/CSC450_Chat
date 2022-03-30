@@ -7,14 +7,12 @@ public class chatServer
 {
     public static void main(String[] args) throws Exception
     {
-        ServerSocket s = new ServerSocket(2222);
-        ArrayList<ChatWorkerThread> theThreads = new ArrayList<ChatWorkerThread>();
+        ServerSocket s = new ServerSocket(2222); 
         while(true)
         {
             System.out.println("Listenning for Connection...");
             Socket client = s.accept(); //blocks
             ChatWorkerThread t = new ChatWorkerThread(client);
-            theThreads.add(t);
             t.start();
         }
         

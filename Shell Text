@@ -1,0 +1,6 @@
+jordanlafferty@Jordans-MacBook-Pro-3 ~ % cd Desktop           
+jordanlafferty@Jordans-MacBook-Pro-3 Desktop % cd CSC450_CHAT-MAIN  
+
+jordanlafferty@Jordans-MacBook-Pro-3 CSC450_CHAT-MAIN % cd Server
+jordanlafferty@Jordans-MacBook-Pro-3 Server % ./runChatServer
+./runChatClient 
