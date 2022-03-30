@@ -6,7 +6,6 @@ public class ChatWorkerThread extends Thread
 {
     private Socket theClientSocket;
     private PrintStream clientOutput;
-    private PrintStream Question;
     private Scanner clientInput;
 
     public ChatWorkerThread(Socket theClientSocket)
@@ -17,7 +16,6 @@ public class ChatWorkerThread extends Thread
             this.theClientSocket = theClientSocket;
             this.clientOutput = new PrintStream(this.theClientSocket.getOutputStream());    
             this.clientInput = new Scanner(this.theClientSocket.getInputStream());
-            this.Question = new PrintStream(this.theClientSocket.getOutputStream()); 
         } 
         catch (Exception e) 
         {
@@ -31,16 +29,21 @@ public class ChatWorkerThread extends Thread
     {
         //this is what the thread does
         Singleton x = Singleton.createSingleton();
-        this.clientOutput.println(x.messages);
-        String message = clientInput.nextLine();
-        x.addMessage(message);
-        System.out.println("read: " + message);
+        while(true)
+        {
+            this.clientOutput.println(x.messages);
+            String message = clientInput.nextLine();
+            x.addMessage(message);
+            System.out.println("read: " + message);
+        }
+        
     }
 }
 class Singleton {
     private static Singleton single = null;
-    public String s = " ";
+    public String s = "Message: ";
     public String messages = "";
+    public String temp = "";
 
     public static Singleton createSingleton()
     {
@@ -58,6 +61,16 @@ class Singleton {
     public void addMessage (String y)
     {
         messages = messages + "Message: " + y + " ";
+        temp = messages;
+    }
+
+    public boolean checkIfChanged()
+    {
+        if(temp == s)
+        {
+            return true;
+        }
+        return false;
     }
 
 
